@@ -1,17 +1,22 @@
+<!DOCTYPE html>
+<html>
 <head>
-    <title>API Call Example</title>
+    <title>Movies Released in the Last Two Weeks</title>
 </head>
 <body>
-    <h1>API Call Example</h1>
-    <button id="fetch-button">Fetch Data</button>
-    <pre id="result"></pre>
-
-    <script>
-        document.getElementById('fetch-button').addEventListener('click', async () => {
-            const response = await fetch('/');
-            const data = await response.json();
-            document.getElementById('result').innerText = JSON.stringify(data, null, 2);
-        });
-    </script>
+    <h1>Movies Released in the Last Two Weeks</h1>
+    <ul>
+    {% for movie in movies %}
+        <li>
+            <h2>{{ movie[0] }}</h2>
+            <p><strong>Release Date:</strong> {{ movie[1] }}</p>
+            <p><strong>Overview:</strong> {{ movie[2] }}</p>
+            <p><strong>Genres:</strong> {{ movie[3] }}</p>
+            {% if movie[4] %}
+                <img src="{{ movie[4] }}" alt="{{ movie[0] }} poster" width="200">
+            {% endif %}
+        </li>
+    {% endfor %}
+    </ul>
 </body>
-
+</html>
