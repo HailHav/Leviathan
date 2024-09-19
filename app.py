@@ -51,7 +51,7 @@ movies_data = []
       genre_ids = movie.get('genre_ids')
       poster_path = movie.get('poster_path')
       poster_url = f"https://image.tmdb.org/t/p/w500{poster_path}" if poster_path else None
-      movies_data.append((movie_title, release_date, overview, genre_ids, poster_url))
+      movies_data.append((movie_title, release_date, overview, genre_ids))
 
 # The variable 'movies_data' now contains a list of tuples with the specific data from the API response
       movies_data
