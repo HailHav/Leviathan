@@ -54,8 +54,9 @@ movies_data = []
       movies_data.append((movie_title, release_date, overview, genre_ids, poster_url))
 
 # The variable 'movies_data' now contains a list of tuples with the specific data from the API response
-  movies_data
-      return jsonify({"message": "Hello, World!"})
+      movies_data
+      
+    return jsonify({"message": movies_data})
 
 if __name__ == '__main__':
     app.run(debug=True)
