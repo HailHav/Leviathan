@@ -56,7 +56,7 @@ movies_data = []
 # The variable 'movies_data' now contains a list of tuples with the specific data from the API response
       movies_data
     print(movie_data)
-    return jsonify(movies_data)
+    return (movies_data)
 
 if __name__ == '__main__':
     app.run(debug=True)
