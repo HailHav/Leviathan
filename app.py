@@ -2,7 +2,7 @@ from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
-@app.route('/api/data', methods=['GET'])
+@app.route('/', methods=['GET'])
 def get_data():
     # Define the API endpoint and the API key
   api_url = "https://api.themoviedb.org/3/discover/movie"
@@ -56,7 +56,7 @@ movies_data = []
 # The variable 'movies_data' now contains a list of tuples with the specific data from the API response
       movies_data
       
-    return jsonify({"message": movies_data})
+    return jsonify(movies_data)
 
 if __name__ == '__main__':
     app.run(debug=True)
