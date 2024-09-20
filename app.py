@@ -1,3 +1,4 @@
+import os
 import requests
 from datetime import datetime, timedelta
 from flask import Flask, render_template
@@ -6,7 +7,7 @@ app = Flask(__name__)
 
 # Define the API endpoint and the API key
 api_url = "https://api.themoviedb.org/3/discover/movie"
-api_key = "9b1a66356cd028cd9f69f02cd9c543cb"
+api_key = os.getenv("9b1a66356cd028cd9f69f02cd9c543cb")
 
 # Calculate the date two weeks ago
 today = datetime.now()
@@ -40,6 +41,7 @@ while page <= total_pages:
         all_movies.extend(movies)
         page += 1
     else:
+        print(f"Error: {response.status_code}")
         break
 
 # Extract specific data from the response
