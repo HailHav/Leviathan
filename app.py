@@ -57,6 +57,8 @@ for movie in all_movies:
 
 @app.route('/')
 def show_movies():
+    print(movie_data)
+    print("pls pls pls dont prove them right")
     return render_template('index.html', movies=movies_data)
 
 if __name__ == '__main__':
