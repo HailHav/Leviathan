@@ -1,24 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Movies Released in the Last Two Weeks</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .movie {
+            margin-bottom: 20px;
+        }
+        .movie-title {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        .movie-overview {
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Movies Released in the Last Two Weeks</h1>
-    <ul>
-    {% for movie in movies %}
-        <li>
-            <h2>{{ movie[0] }}</h2>
-            <p><strong>Release Date:</strong> {{ movie[1] }}</p>
-            <p><strong>Overview:</strong> {{ movie[2] }}</p>
-            <p><strong>Genres:</strong> {{ movie[3] }}</p>
-             <!--
-            {% if movie[4] %}
-            <img src="{{ movie[4] }}" alt="{{ movie[0] }} poster" style="width:200px;">
-            {% endif %}
-            -->
-        </li>
-    {% endfor %}
-    </ul>
+    <h1>Movie List</h1>
+    <div id="movies"></div>
+    <script src="app.js"></script>
 </body>
 </html>
