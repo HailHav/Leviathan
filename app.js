@@ -111,4 +111,3 @@ fetch(mtgBaseUrl, requestOptions)
   .catch(error => {
     console.error('Error:', error);
   });
-
