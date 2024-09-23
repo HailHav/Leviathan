@@ -67,7 +67,7 @@ fetch(apiUrl, requestOptions)
     console.error('Error:', error);
   });
 
-// Fetch and display a random Magic: The Gathering card
+// Magic the gathering
 fetch(mtgBaseUrl, requestOptions)
   .then(response => {
     if (!response.ok) {
@@ -78,7 +78,7 @@ fetch(mtgBaseUrl, requestOptions)
     return response.json();
   })
   .then(data => {
-    console.log(data);  // Log the entire response to check the structure
+    console.log('MTG Card Data:', data);  // Log the entire response to check the structure
 
     const card = data;  // Scryfall API returns a single card object
     const cardContainer = document.getElementById('card');
