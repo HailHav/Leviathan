@@ -78,6 +78,8 @@ fetch(mtgBaseUrl, requestOptions)
     return response.json();
   })
   .then(data => {
+    console.log(data);  // Log the entire response to check the structure
+
     const card = data;  // Scryfall API returns a single card object
     const cardContainer = document.getElementById('card');
     cardContainer.innerHTML = '';
@@ -95,7 +97,11 @@ fetch(mtgBaseUrl, requestOptions)
     
     const cardImage = document.createElement('img');
     cardImage.classList.add('card-image');
-    cardImage.src = card.image_uris.normal;  // Use the normal size image URL
+    if (card.image_uris && card.image_uris.normal) {
+      cardImage.src = card.image_uris.normal;  // Use the normal size image URL
+    } else {
+      cardImage.alt = "Image not available";
+    }
     
     cardDiv.appendChild(cardName);
     cardDiv.appendChild(cardText);
@@ -105,3 +111,4 @@ fetch(mtgBaseUrl, requestOptions)
   .catch(error => {
     console.error('Error:', error);
   });
+
