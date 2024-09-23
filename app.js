@@ -1,5 +1,5 @@
 const apiKey = '9b1a66356cd028cd9f69f02cd9c543cb';
-const baseUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}`;
+const baseUrl = `https://api.themoviedb.org/3/discover/movie`;
 
 // Calculate the date range
 const today = new Date();
