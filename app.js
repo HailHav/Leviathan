@@ -72,43 +72,27 @@ fetch(mtgBaseUrl, requestOptions)
   .then(response => {
     if (!response.ok) {
       return response.text().then(text => {
-        throw new Error(`Network response was not ok: ${text}`);
-      });
-    }
     return response.json();
   })
   .then(data => {
-    console.log('MTG Card Data:', data);  // Log the entire response to check the structure
-
+    const card = data.cards[0];  // Assuming the API returns an array of cards
     const card = data;  // Scryfall API returns a single card object
     const cardContainer = document.getElementById('card');
     cardContainer.innerHTML = '';
-    
-    const cardDiv = document.createElement('div');
-    cardDiv.classList.add('card');
-    
-    const cardName = document.createElement('div');
-    cardName.classList.add('card-name');
-    cardName.textContent = card.name;
-    
+
+
     const cardText = document.createElement('div');
     cardText.classList.add('card-text');
+    cardText.textContent = card.text || card.flavor;  // Use card text or flavor text
     cardText.textContent = card.oracle_text || card.flavor_text;  // Use card text or flavor text
     
+    const cardImage = document.createElement('img');
+    cardImage.classList.add('card-image');
+    cardImage.src = card.image_uris.normal;  // Use the normal size image URL
+
     cardDiv.appendChild(cardName);
     cardDiv.appendChild(cardText);
-    console.log(card.image_uris);
-    if (card.image_uris && card.image_uris.normal) {
-      const cardImage = document.createElement('img');
-      cardImage.classList.add('card-image');
-      cardImage.src = card.image_uris.normal;  // Use the normal size image URL
-      cardDiv.appendChild(cardImage);
-    } else {
-      const noImageText = document.createElement('div');
-      noImageText.textContent = "Image not available";
-      cardDiv.appendChild(noImageText);
-    }
-    
+    cardDiv.appendChild(cardImage);
     cardContainer.appendChild(cardDiv);
   })
   .catch(error => {
