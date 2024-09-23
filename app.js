@@ -97,7 +97,7 @@ fetch(mtgBaseUrl, requestOptions)
     
     cardDiv.appendChild(cardName);
     cardDiv.appendChild(cardText);
-    
+    console.log(card.image_uris);
     if (card.image_uris && card.image_uris.normal) {
       const cardImage = document.createElement('img');
       cardImage.classList.add('card-image');
