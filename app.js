@@ -52,9 +52,14 @@ fetch(apiUrl, requestOptions)
       const movieOverview = document.createElement('div');
       movieOverview.classList.add('movie-overview');
       movieOverview.textContent = movie.overview;
+
+      const moviePoster = document.createElement('img');
+      moviePoster.classList.add('movie-poster');
+      moviePoster.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;  // Use the poster path from the API
       
       movieDiv.appendChild(movieTitle);
       movieDiv.appendChild(movieOverview);
+      movieDiv.appendChild(moviePoster);
       moviesContainer.appendChild(movieDiv);
     });
   })
