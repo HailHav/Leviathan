@@ -33,6 +33,12 @@ h1 {
             font-size: 1.5em;
             font-weight: bold;
 }
+.movie-poster {
+    width: 100px; /* Adjust the width as needed */
+    height: auto; /* Maintain aspect ratio */
+    display: block;
+    margin: 0 auto 10px; /* Center the image and add some margin */
+}
 .movie-overview {
             margin-top: 10px;
 }
