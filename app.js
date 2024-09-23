@@ -1,8 +1,29 @@
 const apiKey = '9b1a66356cd028cd9f69f02cd9c543cb';
 const apiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}`;
 
+// Calculate the date range
+const today = new Date();
+const twoWeeksAgo = new Date(today);
+twoWeeksAgo.setDate(today.getDate() - 14);
+
+const todayStr = today.toISOString().split('T')[0];
+const twoWeeksAgoStr = twoWeeksAgo.toISOString().split('T')[0];
+
+// Define the query parameters
+const params = new URLSearchParams({
+  api_key: apiKey,
+  "primary_release_date.gte": twoWeeksAgoStr,
+  "primary_release_date.lte": todayStr,
+  "include_adult": "false",
+  "page": "1"
+});
+
+// Construct the full URL with query parameters
+const apiUrl = `${baseUrl}?${params.toString()}`;
+
+// Define the request options
 const requestOptions = {
-  method: 'GET',
+  method: 'GET'
 };
 
 fetch(apiUrl, requestOptions)
