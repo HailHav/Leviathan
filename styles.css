@@ -6,6 +6,11 @@ body {
     cursor: url('dog-cursor.png'), auto; /* Custom dog cursor */
 }
 
+.toolbar {
+    background-color: #333;
+    overflow: hidden;
+}
+
 h1 {
     text-align: center;
     color: #333;
