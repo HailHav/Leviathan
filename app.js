@@ -7,6 +7,7 @@ const requestOptions = {
 
 fetch(apiUrl, requestOptions)
   .then(response => {
+    console.log(response);
     if (!response.ok) {
       return response.text().then(text => {
         throw new Error(`Network response was not ok: ${text}`);
@@ -15,6 +16,7 @@ fetch(apiUrl, requestOptions)
     return response.json();
   })
   .then(data => {
+    console.log(data);
     const movies = data.results;
     const moviesContainer = document.getElementById('movies');
     movies.forEach(movie => {
