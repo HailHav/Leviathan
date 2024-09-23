@@ -1,5 +1,6 @@
 const apiKey = '9b1a66356cd028cd9f69f02cd9c543cb';
 const baseUrl = `https://api.themoviedb.org/3/discover/movie`;
+const mtgBaseUrl = "https://api.magicthegathering.io/v1/cards";
 
 // Calculate the date range
 const today = new Date();
@@ -56,6 +57,40 @@ fetch(apiUrl, requestOptions)
       movieDiv.appendChild(movieOverview);
       moviesContainer.appendChild(movieDiv);
     });
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+
+// Fetch and display a random Magic: The Gathering card
+fetch(`${mtgBaseUrl}?random=true`, requestOptions)
+  .then(response => {
+    if (!response.ok) {
+      return response.text().then(text => {
+        throw new Error(`Network response was not ok: ${text}`);
+      });
+    }
+    return response.json();
+  })
+  .then(data => {
+    const card = data.cards[0];  // Assuming the API returns an array of cards
+    const cardContainer = document.getElementById('card');
+    cardContainer.innerHTML = '';
+    
+    const cardDiv = document.createElement('div');
+    cardDiv.classList.add('card');
+    
+    const cardName = document.createElement('div');
+    cardName.classList.add('card-name');
+    cardName.textContent = card.name;
+    
+    const cardText = document.createElement('div');
+    cardText.classList.add('card-text');
+    cardText.textContent = card.text || card.flavor;  // Use card text or flavor text
+    
+    cardDiv.appendChild(cardName);
+    cardDiv.appendChild(cardText);
+    cardContainer.appendChild(cardDiv);
   })
   .catch(error => {
     console.error('Error:', error);
