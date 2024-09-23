@@ -95,18 +95,20 @@ fetch(mtgBaseUrl, requestOptions)
     cardText.classList.add('card-text');
     cardText.textContent = card.oracle_text || card.flavor_text;  // Use card text or flavor text
     
-    const cardImage = document.createElement('img');
-    cardImage.classList.add('card-image');
-    if (card.image_uris && card.image_uris.normal) {
-      cardImage.src = card.image_uris.normal;  // Use the normal size image URL
-    } else {
-      cardImage.src = 'placeholder-image-url';  // Use a placeholder image if the card image is not available
-      cardImage.alt = "Image not available";
-    }
-    
     cardDiv.appendChild(cardName);
     cardDiv.appendChild(cardText);
-    cardDiv.appendChild(cardImage);
+    
+    if (card.image_uris && card.image_uris.normal) {
+      const cardImage = document.createElement('img');
+      cardImage.classList.add('card-image');
+      cardImage.src = card.image_uris.normal;  // Use the normal size image URL
+      cardDiv.appendChild(cardImage);
+    } else {
+      const noImageText = document.createElement('div');
+      noImageText.textContent = "Image not available";
+      cardDiv.appendChild(noImageText);
+    }
+    
     cardContainer.appendChild(cardDiv);
   })
   .catch(error => {
