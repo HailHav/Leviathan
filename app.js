@@ -100,6 +100,7 @@ fetch(mtgBaseUrl, requestOptions)
     if (card.image_uris && card.image_uris.normal) {
       cardImage.src = card.image_uris.normal;  // Use the normal size image URL
     } else {
+      cardImage.src = 'placeholder-image-url';  // Use a placeholder image if the card image is not available
       cardImage.alt = "Image not available";
     }
     
