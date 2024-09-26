@@ -6,7 +6,8 @@
     <title>LEVIATHAN</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@latest/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
-body {
+    <style>
+        body {
             font-family: Arial, sans-serif;
             padding-top: 56px; /* Adjust based on navbar height */
         }
@@ -23,11 +24,6 @@ body {
     </style>
 </head>
 <body>
-
-
-
-
-    
 <nav class="navbar navbar-expand-lg navbar-light bg-primary fixed-top">
   <a class="navbar-brand" href="#">Leviathan</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,13 +44,22 @@ body {
   </div>
 </nav>
 
-<h1> LEVIATHAN </h1>
-    
-    <h1>Latest Movie List</h1>
-    <div id="movies" class="movies-container"> </div>
-     <h1>Magic: The Gathering Card of the Day</h1>
-    <div id="card"></div>
+<h1>LEVIATHAN</h1>
+<h1>Latest Movie List</h1>
+<div id="loading" style="display: none;">Loading...</div>
+<div id="movies" class="movies-container"></div>
 
+<h1>Random Movie Selector</h1>
+<div>
+    <select id="genreSelect" class="form-select">
+        <option value="">Select Genre</option>
+    </select>
+    <button id="randomMovieButton" class="btn btn-primary">Get Random Movie</button>
+</div>
+<div id="randomMovie" class="movie-container"></div>
+
+<h1>Magic: The Gathering Card of the Day</h1>
+<div id="card"></div>
     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@latest/dist/js/bootstrap.bundle.min.js"></script>
