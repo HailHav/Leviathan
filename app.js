@@ -83,7 +83,7 @@ const requestOptions = {
   method: 'GET'
 };
 
-// Fetch and display movies
+// Fetch and display latest movies
 fetch(apiUrl, requestOptions)
   .then(response => {
     console.log(response);
