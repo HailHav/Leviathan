@@ -35,18 +35,18 @@ document.getElementById('randomMovieButton').addEventListener('click', () => {
       randomMovieContainer.innerHTML = '';  // Clear previous content
 
       const movieDiv = document.createElement('div');
-      movieDiv.classList.add('movie');
+      movieDiv.classList.add('random-movie');
       
       const movieTitle = document.createElement('div');
-      movieTitle.classList.add('movie-title');
+      movieTitle.classList.add('random-movie-title');
       movieTitle.textContent = randomMovie.title;
       
       const movieOverview = document.createElement('div');
-      movieOverview.classList.add('movie-overview');
+      movieOverview.classList.add('random-movie-overview');
       movieOverview.textContent = randomMovie.overview;
 
       const moviePoster = document.createElement('img');
-      moviePoster.classList.add('movie-poster');
+      moviePoster.classList.add('random-movie-poster');
       const moviePosterPath = randomMovie.poster_path ? `https://image.tmdb.org/t/p/w500${randomMovie.poster_path}` : 'path/to/default/image.jpg';
       moviePoster.src = moviePosterPath;
       
