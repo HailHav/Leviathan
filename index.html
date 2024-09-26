@@ -19,7 +19,6 @@
             margin-bottom: 10px;
             overflow: hidden;
             transition: transform 0.2s;
-            width: 200px; /* Adjust width as needed */
         }
         .movie:hover, .random-movie:hover {
             transform: scale(1.05);
@@ -77,7 +76,7 @@
 <h1>LEVIATHAN</h1>
 <h1>Latest Movie List</h1>
 <div id="loading" style="display: none;">Loading...</div>
-<div id="movies" class="movies-container"></div>
+<div id="movies" class="movies-container row"></div>
 
 <h1>Random Movie Selector</h1>
 <div>
@@ -86,7 +85,7 @@
     </select>
     <button id="randomMovieButton" class="btn btn-primary">Get Random Movie</button>
 </div>
-<div id="randomMovie" class="random-movie-container"></div>
+<div id="randomMovie" class="random-movie-container row"></div>
 
 <h1>Magic: The Gathering Card of the Day</h1>
 <div id="card"></div>
@@ -96,4 +95,5 @@
 <script src="app.js"></script>
 </body>
 </html>
+
 
