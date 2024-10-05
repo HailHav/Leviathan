@@ -1,8 +1,11 @@
+
+
 const apiKey = '9b1a66356cd028cd9f69f02cd9c543cb';
 const baseUrl = `https://api.themoviedb.org/3/discover/movie`;
 const genreUrl = `https://api.themoviedb.org/3/genre/movie/list`;
 const mtgBaseUrl = "https://api.scryfall.com/cards/random";
 
+///rando movie generator
 // Fetch genres and populate the dropdown
 fetch(`${genreUrl}?api_key=${apiKey}`)
   .then(response => response.json())
@@ -58,6 +61,12 @@ document.getElementById('randomMovieButton').addEventListener('click', () => {
     .catch(error => console.error('Error fetching random movie:', error));
 });
 
+
+
+//movie grid
+
+
+
 // Calculate the date range
 const today = new Date();
 const twoWeeksAgo = new Date(today);
@@ -104,31 +113,52 @@ fetch(apiUrl, requestOptions)
       return;
     }
     movies.forEach(movie => {
+      // Create a Bootstrap card
       const movieDiv = document.createElement('div');
-      movieDiv.classList.add('movie');
-      
-      const movieTitle = document.createElement('div');
-      movieTitle.classList.add('movie-title');
-      movieTitle.textContent = movie.title;
-      
-      const movieOverview = document.createElement('div');
-      movieOverview.classList.add('movie-overview');
-      movieOverview.textContent = movie.overview;
+      movieDiv.classList.add('col-md-4', 'mb-4');
 
+      const card = document.createElement('div');
+      card.classList.add('card');
+      
       const moviePoster = document.createElement('img');
-      moviePoster.classList.add('movie-poster');
+      moviePoster.classList.add('card-img-top');
       const moviePosterPath = movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : 'path/to/default/image.jpg';
       moviePoster.src = moviePosterPath;
-      
-      movieDiv.appendChild(movieTitle);
-      movieDiv.appendChild(movieOverview);
-      movieDiv.appendChild(moviePoster);
+
+      const cardBody = document.createElement('div');
+      cardBody.classList.add('card-body');
+
+      const movieTitle = document.createElement('h5');
+      movieTitle.classList.add('card-title');
+      movieTitle.textContent = movie.title;
+
+      const movieOverview = document.createElement('p');
+      movieOverview.classList.add('card-text');
+      movieOverview.textContent = movie.overview;
+
+      cardBody.appendChild(movieTitle);
+      cardBody.appendChild(movieOverview);
+      card.appendChild(moviePoster);
+      card.appendChild(cardBody);
+      movieDiv.appendChild(card);
       moviesContainer.appendChild(movieDiv);
     });
   })
   .catch(error => {
     console.error('Fetch error:', error);
   });
+
+
+
+
+
+
+//Magic
+
+
+
+
+
 
 // Fetch and display a random Magic: The Gathering card
 fetch(mtgBaseUrl)
