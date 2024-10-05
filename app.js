@@ -29,37 +29,56 @@ document.getElementById('randomMovieButton').addEventListener('click', () => {
   }
 
   const randomMovieUrl = `${baseUrl}?api_key=${apiKey}&with_genres=${genreId}&sort_by=popularity.desc&page=${Math.floor(Math.random() * 500) + 1}`;
+fetch(randomMovieUrl)
+  .then(response => response.json()) // Parse the JSON response
+  .then(data => {
+    // Get a random movie from the results
+    const randomMovie = data.results[Math.floor(Math.random() * data.results.length)];
+    const randomMovieContainer = document.getElementById('randomMovie'); // Find the container to display the movie
+    randomMovieContainer.innerHTML = '';  // Clear any previous content
 
-  fetch(randomMovieUrl)
-    .then(response => response.json())
-    .then(data => {
-      const randomMovie = data.results[Math.floor(Math.random() * data.results.length)];
-      const randomMovieContainer = document.getElementById('randomMovie');
-      randomMovieContainer.innerHTML = '';  // Clear previous content
+    // Create a Bootstrap card div
+    const movieDiv = document.createElement('div');
+    movieDiv.classList.add('card', 'col-sm-6', 'col-md-4', 'col-lg-3', 'mb-4'); // Add responsive column classes
 
-      const movieDiv = document.createElement('div');
-      movieDiv.classList.add('random-movie');
-      
-      const movieTitle = document.createElement('div');
-      movieTitle.classList.add('random-movie-title');
-      movieTitle.textContent = randomMovie.title;
-      
-      const movieOverview = document.createElement('div');
-      movieOverview.classList.add('random-movie-overview');
-      movieOverview.textContent = randomMovie.overview;
+    // Create a card body div
+    const cardBody = document.createElement('div');
+    cardBody.classList.add('card-body');
 
+    // Add the movie title
+    const movieTitle = document.createElement('h5');
+    movieTitle.classList.add('card-title');
+    movieTitle.textContent = randomMovie.title;
+    
+    // Add the movie overview
+    const movieOverview = document.createElement('p');
+    movieOverview.classList.add('card-text');
+    movieOverview.textContent = randomMovie.overview;
+
+    // Append the title and overview to the card body
+    cardBody.appendChild(movieTitle);
+    cardBody.appendChild(movieOverview);
+
+    // Add the movie poster if available
+    if (randomMovie.poster_path) {
       const moviePoster = document.createElement('img');
-      moviePoster.classList.add('random-movie-poster');
-      const moviePosterPath = randomMovie.poster_path ? `https://image.tmdb.org/t/p/w500${randomMovie.poster_path}` : 'path/to/default/image.jpg';
-      moviePoster.src = moviePosterPath;
-      
-      movieDiv.appendChild(movieTitle);
-      movieDiv.appendChild(movieOverview);
+      moviePoster.classList.add('card-img-top');
+      moviePoster.src = `https://image.tmdb.org/t/p/w500${randomMovie.poster_path}`;
       movieDiv.appendChild(moviePoster);
-      randomMovieContainer.appendChild(movieDiv);
-    })
-    .catch(error => console.error('Error fetching random movie:', error));
-});
+    } else {
+      // If no image is available, display a text placeholder
+      const noImageText = document.createElement('div');
+      noImageText.textContent = "Image not available";
+      cardBody.appendChild(noImageText);
+    }
+    
+    // Append the card body to the card div
+    movieDiv.appendChild(cardBody);
+    // Append the card div to the main container
+    randomMovieContainer.appendChild(movieDiv);
+  })
+  .catch(error => console.error('Error fetching random movie:', error)); // Log any errors
+
 
 
 
@@ -158,41 +177,52 @@ fetch(apiUrl, requestOptions)
 
 
 
-
-
 // Fetch and display a random Magic: The Gathering card
 fetch(mtgBaseUrl)
-  .then(response => response.json())
+  .then(response => response.json()) // Parse the JSON response
   .then(data => {
-    const card = data;
-    const cardContainer = document.getElementById('card');
-    cardContainer.innerHTML = '';  // Clear previous content
+    const magiccard = data; // Store the card data
+    const cardContainer = document.getElementById('card'); // Find the container to display the card
+    cardContainer.innerHTML = '';  // Clear any previous content
 
+    // Create a Bootstrap card div
     const cardDiv = document.createElement('div');
-    cardDiv.classList.add('card', 'col-sm-6', 'col-md-4', 'col-lg-3');
+    cardDiv.classList.add('card', 'col-sm-6', 'col-md-4', 'col-lg-3', 'mb-4'); // Add responsive column classes
+
+    // Create a card body div
+    const cardBody = document.createElement('div');
+    cardBody.classList.add('card-body');
+
+    // Add the card title (card name)
+    const cardName = document.createElement('h5');
+    cardName.classList.add('card-title');
+    cardName.textContent = magiccard.name;
     
-    const cardName = document.createElement('div');
-    cardName.classList.add('card-name');
-    cardName.textContent = card.name;
-    
-    const cardText = document.createElement('div');
+    // Add the card text (oracle or flavor text)
+    const cardText = document.createElement('p');
     cardText.classList.add('card-text');
-    cardText.textContent = card.oracle_text || card.flavor_text;
+    cardText.textContent = magiccard.oracle_text || magiccard.flavor_text;
     
-    cardDiv.appendChild(cardName);
-    cardDiv.appendChild(cardText);
-    
-    if (card.image_uris && card.image_uris.normal) {
+    // Append the card name and text to the card body
+    cardBody.appendChild(cardName);
+    cardBody.appendChild(cardText);
+
+    // Add the card image if available
+    if (magiccard.image_uris && magiccard.image_uris.normal) {
       const cardImage = document.createElement('img');
-      cardImage.classList.add('card-image');
-      cardImage.src = card.image_uris.normal;
+      cardImage.classList.add('card-img-top');
+      cardImage.src = magiccard.image_uris.normal;
       cardDiv.appendChild(cardImage);
     } else {
+      // If no image is available, display a text placeholder
       const noImageText = document.createElement('div');
       noImageText.textContent = "Image not available";
-      cardDiv.appendChild(noImageText);
+      cardBody.appendChild(noImageText);
     }
     
+    // Append the card body to the card div
+    cardDiv.appendChild(cardBody);
+    // Append the card div to the main container
     cardContainer.appendChild(cardDiv);
   })
-  .catch(error => console.error('Error fetching MTG card:', error));
+  .catch(error => console.error('Error fetching MTG card:', error)); // Log any errors
