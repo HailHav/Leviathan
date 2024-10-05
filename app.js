@@ -115,7 +115,7 @@ fetch(apiUrl, requestOptions)
     movies.forEach(movie => {
       // Create a Bootstrap card
       const movieDiv = document.createElement('div');
-      movieDiv.classList.add('col-md-4', 'mb-4');
+      movieDiv.classList.add('col-sm-3', 'mb-4');
 
       const card = document.createElement('div');
       card.classList.add('card');
