@@ -85,7 +85,7 @@ const requestOptions = {
   method: 'GET'
 };
 
-      return;
+    return;
     }
     movies.forEach(movie => {
       // Create a Bootstrap card
