@@ -172,3 +172,15 @@ fetch(mtgBaseUrl)
 
     if (card.image_uris && card.image_uris.normal) {
       const cardImage = document.createElement('img');
+      cardImage.classList.add('card-image');
+      cardImage.src = card.image_uris.normal;
+      cardDiv.appendChild(cardImage);
+    } else {
+      const noImageText = document.createElement('div');
+      noImageText.textContent = "Image not available";
+      cardDiv.appendChild(noImageText);
+    }
+
+    cardContainer.appendChild(cardDiv);
+  })
+  .catch(error => console.error('Error fetching MTG card:', error));
