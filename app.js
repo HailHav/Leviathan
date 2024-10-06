@@ -84,7 +84,7 @@ const apiUrl = `${baseUrl}?${params.toString()}`;
 const requestOptions = {
   method: 'GET'
 };
-@@ -104,53 +113,74 @@
+
       return;
     }
     movies.forEach(movie => {
