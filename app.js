@@ -117,32 +117,17 @@ fetch(apiUrl, requestOptions)
 
 
     movies.forEach(movie => {
-      // Create a Bootstrap card
+     // Create a Bootstrap card
       const movieDiv = document.createElement('div');
-      movieDiv.classList.add('movie');
-      
-      const movieTitle = document.createElement('div');
-      movieTitle.classList.add('movie-title');
-      movieTitle.textContent = movie.title;
-      
-      const movieOverview = document.createElement('div');
-      movieOverview.classList.add('movie-overview');
-      movieOverview.textContent = movie.overview;
-      movieDiv.classList.add('col-md-4', 'mb-4');
+      movieDiv.classList.add('col-md-3', 'mb-6');
 
       const card = document.createElement('div');
       card.classList.add('card');
-      
-      const moviePoster = document.createElement('img');
-      moviePoster.classList.add('movie-poster');
       moviePoster.classList.add('card-img-top');
+
       const moviePosterPath = movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : 'path/to/default/image.jpg';
       moviePoster.src = moviePosterPath;
-      
-      movieDiv.appendChild(movieTitle);
-      movieDiv.appendChild(movieOverview);
-      movieDiv.appendChild(moviePoster);
-      const cardBody = document.createElement('div');
+            const cardBody = document.createElement('div');
       cardBody.classList.add('card-body');
       const movieTitle = document.createElement('h5');
       movieTitle.classList.add('card-title');
