@@ -59,7 +59,15 @@ document.getElementById('randomMovieButton').addEventListener('click', () => {
     .catch(error => console.error('Error fetching random movie:', error));
 });
 
+
+
 //movie grid
+
+
+
+
+
+
 // Calculate the date range
 const today = new Date();
 const twoWeeksAgo = new Date(today);
@@ -85,8 +93,29 @@ const requestOptions = {
   method: 'GET'
 };
 
-    return;
+
+// Fetch and display latest movies
+fetch(apiUrl, requestOptions)
+  .then(response => {
+    console.log(response);
+    if (!response.ok) {
+      return response.text().then(text => {
+        throw new Error(`Network response was not ok: ${text}`);
+      });
     }
+    return response.json();
+  })
+  .then(data => {
+    console.log(data);
+    const movies = data.results;
+    const moviesContainer = document.getElementById('movies');
+    moviesContainer.innerHTML = '';  // Clear previous content
+    if (movies.length === 0) {
+      moviesContainer.textContent = 'No movies found for the selected date range.';
+      return;
+    }
+
+
     movies.forEach(movie => {
       // Create a Bootstrap card
       const movieDiv = document.createElement('div');
