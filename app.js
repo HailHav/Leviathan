@@ -123,6 +123,7 @@ fetch(apiUrl, requestOptions)
 
       const card = document.createElement('div');
       card.classList.add('card');
+      const moviePoster = document.createElement('img');
       moviePoster.classList.add('card-img-top');
 
       const moviePosterPath = movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : 'path/to/default/image.jpg';
