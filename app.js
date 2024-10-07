@@ -6,57 +6,76 @@ const mtgBaseUrl = "https://api.scryfall.com/cards/random";
 ///rando movie generator
 // Fetch genres and populate the dropdown
 fetch(`${genreUrl}?api_key=${apiKey}`)
-  .then(response => response.json())
+  .then(response => response.json()) // Parse the JSON response
   .then(data => {
-    const genreSelect = document.getElementById('genreSelect');
+    const genreSelect = document.getElementById('genreSelect'); // Find the genre select dropdown
     data.genres.forEach(genre => {
-      const option = document.createElement('option');
-      option.value = genre.id;
-      option.textContent = genre.name;
-      genreSelect.appendChild(option);
+      const option = document.createElement('option'); // Create option element for each genre
+      option.value = genre.id; // Set the value to the genre ID
+      option.textContent = genre.name; // Set the display text to the genre name
+      genreSelect.appendChild(option); // Append option to the dropdown
     });
   })
-  .catch(error => console.error('Error fetching genres:', error));
+  .catch(error => console.error('Error fetching genres:', error)); // Log any errors
 
 // Fetch and display a random movie based on selected genre
 document.getElementById('randomMovieButton').addEventListener('click', () => {
-  const genreId = document.getElementById('genreSelect').value;
+  const genreId = document.getElementById('genreSelect').value; // Get selected genre ID
   if (!genreId) {
-    alert('Please select a genre.');
+    alert('Please select a genre.'); // Alert if no genre is selected
     return;
   }
 
   const randomMovieUrl = `${baseUrl}?api_key=${apiKey}&with_genres=${genreId}&sort_by=popularity.desc&page=${Math.floor(Math.random() * 500) + 1}`;
 
   fetch(randomMovieUrl)
-    .then(response => response.json())
+    .then(response => response.json()) // Parse the JSON response
     .then(data => {
-      const randomMovie = data.results[Math.floor(Math.random() * data.results.length)];
-      const randomMovieContainer = document.getElementById('randomMovie');
-      randomMovieContainer.innerHTML = '';  // Clear previous content
+      const randomMovie = data.results[Math.floor(Math.random() * data.results.length)]; // Select a random movie
+      const randomMovieContainer = document.getElementById('randomMovie'); // Find the container to display the movie
+      randomMovieContainer.innerHTML = ''; // Clear any previous content
 
+      // Create a Bootstrap card div
       const movieDiv = document.createElement('div');
-      movieDiv.classList.add('random-movie');
+      movieDiv.classList.add('card', 'col-sm-6', 'col-md-4', 'col-lg-3', 'mb-4'); // Add responsive column classes
 
-      const movieTitle = document.createElement('div');
-      movieTitle.classList.add('random-movie-title');
+      // Add the movie image at the top
+      if (randomMovie.poster_path) {
+        const moviePoster = document.createElement('img');
+        moviePoster.classList.add('card-img-top'); // Utilize Bootstrap's card-img-top class
+        moviePoster.src = `https://image.tmdb.org/t/p/w500${randomMovie.poster_path}`;
+        movieDiv.appendChild(moviePoster);
+      } else {
+        // If no image is available, display a text placeholder
+        const noImageText = document.createElement('div');
+        noImageText.textContent = "Image not available";
+        movieDiv.appendChild(noImageText);
+      }
+
+      // Create a card body div
+      const cardBody = document.createElement('div');
+      cardBody.classList.add('card-body');
+
+      // Add the movie title
+      const movieTitle = document.createElement('h5');
+      movieTitle.classList.add('card-title');
       movieTitle.textContent = randomMovie.title;
 
-      const movieOverview = document.createElement('div');
-      movieOverview.classList.add('random-movie-overview');
+      // Add the movie overview
+      const movieOverview = document.createElement('p');
+      movieOverview.classList.add('card-text');
       movieOverview.textContent = randomMovie.overview;
 
-      const moviePoster = document.createElement('img');
-      moviePoster.classList.add('random-movie-poster');
-      const moviePosterPath = randomMovie.poster_path ? `https://image.tmdb.org/t/p/w500${randomMovie.poster_path}` : 'path/to/default/image.jpg';
-      moviePoster.src = moviePosterPath;
+      // Append the title and overview to the card body
+      cardBody.appendChild(movieTitle);
+      cardBody.appendChild(movieOverview);
 
-      movieDiv.appendChild(movieTitle);
-      movieDiv.appendChild(movieOverview);
-      movieDiv.appendChild(moviePoster);
+      // Append the card body to the card div
+      movieDiv.appendChild(cardBody);
+      // Append the card div to the main container
       randomMovieContainer.appendChild(movieDiv);
     })
-    .catch(error => console.error('Error fetching random movie:', error));
+    .catch(error => console.error('Error fetching random movie:', error)); // Log any errors
 });
 
 
