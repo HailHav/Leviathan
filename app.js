@@ -128,7 +128,7 @@ fetch(apiUrl, requestOptions)
 
       const moviePosterPath = movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : 'path/to/default/image.jpg';
       moviePoster.src = moviePosterPath;
-            const cardBody = document.createElement('div');
+      const cardBody = document.createElement('div');
       cardBody.classList.add('card-body');
       const movieTitle = document.createElement('h5');
       movieTitle.classList.add('card-title');
@@ -151,37 +151,50 @@ fetch(apiUrl, requestOptions)
 //Magic
 // Fetch and display a random Magic: The Gathering card
 fetch(mtgBaseUrl)
-  .then(response => response.json())
+  .then(response => response.json()) // Parse the JSON response
   .then(data => {
-    const card = data;
-    const cardContainer = document.getElementById('card');
-    cardContainer.innerHTML = '';  // Clear previous content
+    const card = data; // Store the card data
+    const cardContainer = document.getElementById('card'); // Find the container to display the card
+    cardContainer.innerHTML = '';  // Clear any previous content
 
+    // Create a Bootstrap card div
     const cardDiv = document.createElement('div');
-    cardDiv.classList.add('card', 'col-sm-6', 'col-md-4', 'col-lg-3');
+    cardDiv.classList.add('card', 'col-sm-6', 'col-md-4', 'col-lg-3', 'mb-4'); // Add responsive column classes
 
-    const cardName = document.createElement('div');
-    cardName.classList.add('card-name');
-    cardName.textContent = card.name;
-
-    const cardText = document.createElement('div');
-    cardText.classList.add('card-text');
-    cardText.textContent = card.oracle_text || card.flavor_text;
-
-    cardDiv.appendChild(cardName);
-    cardDiv.appendChild(cardText);
-
+    // Add the card image at the top
     if (card.image_uris && card.image_uris.normal) {
       const cardImage = document.createElement('img');
-      cardImage.classList.add('card-image');
+      cardImage.classList.add('card-img-top');
       cardImage.src = card.image_uris.normal;
       cardDiv.appendChild(cardImage);
     } else {
+      // If no image is available, display a text placeholder
       const noImageText = document.createElement('div');
       noImageText.textContent = "Image not available";
       cardDiv.appendChild(noImageText);
     }
 
+    // Create a card body div
+    const cardBody = document.createElement('div');
+    cardBody.classList.add('card-body');
+
+    // Add the card name
+    const cardName = document.createElement('h5');
+    cardName.classList.add('card-title');
+    cardName.textContent = card.name;
+
+    // Add the card text (oracle or flavor text)
+    const cardText = document.createElement('p');
+    cardText.classList.add('card-text');
+    cardText.textContent = card.oracle_text || card.flavor_text;
+
+    // Append the card name and text to the card body
+    cardBody.appendChild(cardName);
+    cardBody.appendChild(cardText);
+
+    // Append the card body to the card div
+    cardDiv.appendChild(cardBody);
+    // Append the card div to the main container
     cardContainer.appendChild(cardDiv);
   })
-  .catch(error => console.error('Error fetching MTG card:', error));
+  .catch(error => console.error('Error fetching MTG card:', error)); // Log any errors
