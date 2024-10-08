@@ -53,7 +53,7 @@
     </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-dark fixed-top">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
   <a class="navbar-brand" href="#">Leviathan</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -75,7 +75,8 @@
 
 <h1>LEVIATHAN</h1>
 
-    
+<div class="row align-items-center" >
+<div class="col">
 <h1>Random Movie Selector</h1>
 <div>
     <select id="genreSelect" class="form-select">
@@ -84,7 +85,29 @@
     <button id="randomMovieButton" class="btn btn-primary">Get Random Movie</button>
 </div>
 <div id="randomMovie" class="random-movie-container row"></div>
+</div>
+<div class="col">
+<h1>Sleepover Checklist</h1>
+    <div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+  <label class="form-check-label" for="flexCheckDefault">
+    Melatonin
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+  <label class="form-check-label" for="flexCheckChecked">
+    Pajama Pants
+  </label>
+</div>
 
+</div>
+
+
+
+
+
+</div>
 <h1>Latest Movie List</h1>
 <div id="loading" style="display: none;">Loading...</div>
 <div id="movies" class="movies-container"></div>
