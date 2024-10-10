@@ -12,43 +12,8 @@
             padding-top: 56px; /* Adjust based on navbar height */
             background-color: #f8f9fa;
         }
-        .movie, .random-movie, .card {
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            margin-bottom: 10px;
-            overflow: hidden;
-            transition: transform 0.2s;
-        }
-        .movie:hover, .random-movie:hover, .card:hover {
-            transform: scale(1.05);
-        }
-        .movie-title, .random-movie-title, .card-name {
-            font-size: 1em;
-            font-weight: bold;
-            padding: 5px;
-            background-color: #007bff;
-            color: #fff;
-            text-align: center;
-        }
-        .movie-overview, .random-movie-overview, .card-text {
-            padding: 5px;
-            color: #333;
-            font-size: 0.8em; /* Smaller font size */
-        }
-        .movie-poster, .random-movie-poster, .card-image {
-            width: 60%;
-            height: auto;
-            display: block;
-        }
-        .movies-container, .random-movie-container, .card-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-        }
-        #randomMovie {
-            margin-top: 10px;
+        #notepad {
+            background:url('dog-cursor.png') no-repeat center center fixed;        
         }
     </style>
 </head>
@@ -86,7 +51,7 @@
 </div>
 <div id="randomMovie" class="random-movie-container row"></div>
 </div>
-<div class="col bg-light">
+<div class="col bg-light notepad">
 <h2>Sleepover Checklist</h2>
     <div class="form-check">
   <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
